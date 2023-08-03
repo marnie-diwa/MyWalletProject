@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('index', [AuthController::class, 'index'])->name('index');
+Route::get('loginpage', [AuthController::class, 'index'])->name('loginpage');
