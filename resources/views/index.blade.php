@@ -156,10 +156,6 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-
-            @if (Session::has('success'))
-            <div class="alert alert-success">{{Session::get('success')}}</div> 
-            @endif
             
             <div id="content">
 
@@ -369,7 +365,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{Session::get('success')}}</div>
+                @endif
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
