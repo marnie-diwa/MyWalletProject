@@ -39,6 +39,10 @@
                             <div class="alert alert-success">{{Session::get('success')}}</div>
                             @endif
 
+                            @if(Session::has('error'))
+                            <div class="alert alert-danger">{{Session::get('error')}}</div>
+                            @endif
+
                             <form action={{route('loginpage.store')}} method="POST" enctype="multipart/form-data" class="user">
                                 @csrf
                                 <div class="form-group row">

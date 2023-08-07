@@ -17,16 +17,18 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">My Wallet</h1>
                                     </div>
-                                    @if(Session::has('success'))
-                                    <div class="alert alert-success">{{Session::has('success')}}</div>
+
+                                    @if(Session::has('error'))
+                                    <div class="alert alert-danger">{{Session::get('error')}}</div>
                                     @endif
 
-                                    <form class="user">
+                                    <form action={{route('login')}} method="GET" enctype="multipart/form-data" class="user">
+                                        @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -35,9 +37,10 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <!-- <a href="index.html" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </a> -->
+                                        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

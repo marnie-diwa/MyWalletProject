@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view ('login');
+        return view('login');
     }
 
     /**
@@ -63,9 +63,9 @@ class AuthController extends Controller
                 return redirect('/loginpage/create');
             }
         } else {
-            return "Password is not match";
+            return back()->with('error', 'Password not match');
         }
-    } 
+    }
 
     /**
      * Display the specified resource.
@@ -110,5 +110,43 @@ class AuthController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        //
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        $accounts = Account::where('email', $email)->get();
+
+        if (count($accounts) > 0) {
+            $account = Account::where('email', $email)->first();
+
+            $getpassword = $account->password;
+            $fname = $account->fname;
+            $lname = $account->lname;
+
+            if (strcmp($getpassword, md5($password)) == 0) {
+                session()->put('fname', $fname);
+                session()->put('lname', $lname);
+
+                return redirect('/index')->with('success', 'Welcome ' . session('fname') . ' ' . session('lname'));
+            } else {
+                return back()->with('error', 'Wrong Password!');
+            }
+        } else {
+            return back()->with('error', 'Wrong Email!');
+        }
+    }
+
+    public function homepage()
+    {
+        if (session()->has('email')) {
+
+            return view('index');
+        } else {
+            return redirect('/loginpage');
+        }
     }
 }
