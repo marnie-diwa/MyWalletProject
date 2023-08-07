@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Account;
 
 class AuthController extends Controller
 {
@@ -24,6 +25,7 @@ class AuthController extends Controller
     public function create()
     {
         //
+        return view('register');
     }
 
     /**
@@ -35,7 +37,35 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        $fname = $request->input('fname');
+        $lname = $request->input('lname');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $c_password = $request->input('c_password');
+
+        if (strcmp($password, $c_password) == 0) {
+            $accounts = Account::where('email', $email)->get();
+
+            if (count($accounts) <= 0) {
+                $account = new Account;
+                $account->fname = $fname;
+                $account->lname = $lname;
+                $account->email = $email;
+                $account->password = md5($password);
+
+                // $request->session()->flash('message', 'Thanks for signing up. Welcome to our community. We are happy to have you on board.');
+                $account->save();
+
+                // return redirect('/loginpage');
+                return back()->with('success', 'Register account successfully');
+            } else {
+                // $request->session()->flash('taken', 'username is already taken.');
+                return redirect('/loginpage/create');
+            }
+        } else {
+            return "Password is not match";
+        }
+    } 
 
     /**
      * Display the specified resource.
