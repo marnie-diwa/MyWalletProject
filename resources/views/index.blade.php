@@ -156,6 +156,11 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
+
+            @if (Session::has('success'))
+            <div class="alert alert-success">{{Session::get('success')}}</div> 
+            @endif
+            
             <div id="content">
 
                 <!-- Topbar -->

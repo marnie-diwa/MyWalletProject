@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('loginpage', [AuthController::class, 'index'])->name('loginpage');
+Route::post('postlogin', [AuthController::class, 'postlogin'])->name('postlogin');

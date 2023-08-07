@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -80,5 +81,19 @@ class AuthController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function postlogin(Request $request)
+    {
+        $credential = [
+            'email'=>$request->email,
+            'password'=>$request->password
+        ];
+
+        if (Auth::attempt($credential))
+        {
+            return back()->with('success', 'Welcome ' . Auth::user()->fname);
+        }
+        return back()->with('error', 'Login failed. Please try again');
     }
 }
