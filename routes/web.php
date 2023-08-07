@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('loginpage', [AuthController::class, 'index'])->name('loginpage');
+Route::resource('loginpage', 'App\Http\Controllers\AuthController');
 Route::post('postlogin', [AuthController::class, 'postlogin'])->name('postlogin');

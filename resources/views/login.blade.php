@@ -1,5 +1,6 @@
 @extends('layout.main_header')
 @section('content')
+
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -16,21 +17,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">My Wallet</h1>
                                     </div>
-
-                                    @if (Session::has('error'))
-                                    <div class="alert alert-danger">{{Session::get('error')}}</div> 
+                                    @if(Session::has('success'))
+                                    <div class="alert alert-success">{{Session::has('success')}}</div>
                                     @endif
 
-                                    <form class="user" method="post" action="{{route('postlogin')}}">
-                                        @csrf
+                                    <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." name="email">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -52,7 +48,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="/loginpage/create">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,4 +58,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
