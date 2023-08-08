@@ -126,10 +126,12 @@ class AuthController extends Controller
             $getpassword = $account->password;
             $fname = $account->fname;
             $lname = $account->lname;
+            $id = $account->id;
 
             if (strcmp($getpassword, md5($password)) == 0) {
                 session()->put('fname', $fname);
                 session()->put('lname', $lname);
+                session()->put('id', $id);
 
                 return redirect('/index')->with('success', 'Welcome ' . session('fname') . ' ' . session('lname'));
             } else {
@@ -142,8 +144,8 @@ class AuthController extends Controller
 
     public function homepage()
     {
-        if (session()->has('email')) {
-
+        // 
+        if (session()->has('id')) {
             return view('index');
         } else {
             return redirect('/loginpage');
